@@ -18,14 +18,17 @@ and blog posts [1](http://flovv.github.io/Image-Recognition-Google-Vision/) and 
 ```R
 require("RoogleVision")
 
-### plugin your credentials
+
+options("googleAuthR.scopes.selected" = c("https://www.googleapis.com/auth/cloud-platform"))
+
+##### plugin your credentials (if you're using Oauth)
 options("googleAuthR.client_id" = "xxx.apps.googleusercontent.com")
 options("googleAuthR.client_secret" = "")
-
-## use the fantastic Google Auth R package
-### define scope!
-options("googleAuthR.scopes.selected" = c("https://www.googleapis.com/auth/cloud-platform"))
 googleAuthR::gar_auth()
+
+##### pass to service account file (if not using Oauth)
+googleAuthR::gar_auth_service(json_file = "<PATH TO YOUR SERVICE ACCOUNT FILE>.json")
+
 
 ############
 #Basic: you can provide both, local as well as online images:
@@ -36,7 +39,7 @@ getGoogleVisionResponse("https://media-cdn.tripadvisor.com/media/photo-s/02/6b/c
 
 ### FEATURES
 # with the parameter 'feature' you can define which type of analysis you want. Results differ by feature-type
-# The default is set to 'LABEL_DETECTION' but you can choose one out of: FACE_DETECTION, LANDMARK_DETECTION, LOGO_DETECTION, LABEL_DETECTION, TEXT_DETECTION
+# The default is set to 'LABEL_DETECTION' but you can choose one out of: FACE_DETECTION, LANDMARK_DETECTION, LOGO_DETECTION, LABEL_DETECTION, TEXT_DETECTION, IMAGE_PROPERTIES, SAFE_SEARCH_DETECTION
 
 ```
 
